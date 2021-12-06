@@ -38,7 +38,7 @@ config_dir=$($POSTCONF -hx config_directory)
 MAJOR_VER=$($POSTCONF -hx mail_version|cut -d. -f1)
 [ $MAJOR_VER -ge 3 ] && CHROOT_TEST="[yY]" || CHROOT_TEST="[-yY]"
 # see if anything is running chrooted.
-NEED_CHROOT=$(awk '/^[0-9a-z]/ && ($5 ~ "'"$CHROOT_TEST"'") { print "y"; exit}' ${config_dir}/master.cf)
+NEED_CHROOT="y"
 
 if [ -n "$NEED_CHROOT" ] && [ -n "$SYNC_CHROOT" ]; then
 	# Make sure that the chroot environment is set up correctly.
